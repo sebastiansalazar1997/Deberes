@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+
+
+body{
+           background: url("");
+           background-repeat:no-repeat;
+           background-position:center;
+           background-attachment: contain;
+           background-size: cover;
+           background-size: 100vw 100vh;
+           background-attachment: fixed;
+           margin: 0;  
+       }
+    #contenedor1 {
+        width: 700px;
+        height: 200px;
+        position: relative;
+        background: rgb(0,119,128);
+    }
+
+    #animacion {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+
+    }
+
+    #animacion2 {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        
+
+    }
+    #contendor2 {
+        width: 700px;
+        height: 200px;
+        position: relative;
+        background : rgb(0, 119, 128);
+    }
+   
+</style>
+
+<body>
+    <h1>Gran carrera para pasar el semestre</h1>
+    
+    
+    <p>
+        <button id="jugador1">Jugador 1</button>
+        <button id="jugador2">jugador 2</button>
+        <button id="ganador">ganador</button>
+        <h1>Corre corre caballito</h1>
+
+    </p>
+
+    <div id="contenedor1">
+        <div id="animacion"><img src="img/caballo.png" width="50" width="50"></div>
+    
+    </div>
+    <div id="contenedor2">
+        <div id="animacion2"><img src="img/caballo2.png" width="50" width="50"></div>
+       
+    </div>
+    
+
+    <script>
+
+
+//caballitos
+
+        var j1 = new Caballo("carrerin",);
+        var j2 = new Caballo("el memaso ",);
+
+        document.getElementById("jugador1")
+            .addEventListener("click", function () {
+                j1.avanzar();
+                casillas = j1.obtenetTotalRecorrido();
+                j1.myMove(acumular * casillas);
+                ++acumular;
+            });
+
+        var acumular = 0;
+
+        document.getElementById("jugador2")
+            .addEventListener("click", function () {
+                j2.avanzar();
+                casillas1 = j2.obtenetTotalRecorrido();
+                j2.myMove1(acumular1 * casillas1);
+                ++acumular1;
+            });
+
+        var acumular1 = 0;
+
+
+        function myMove(inicio) {
+            var elem = document.getElementById("animacion");
+            var pos = inicio;
+            var id = setInterval(frame, 5, inicio + 30);
+            function frame(fin) {
+                if (pos === fin) {
+                    clearInterval(id);
+                } else {
+                    pos++;
+                    elem.style.left = pos + 'px';
+                }
+            }
+
+        }
+
+        function myMove1(inicio1) {
+            var elem1 = document.getElementById("animacion2");
+            var pos1 = inicio1;
+            var id1 = setInterval(frame, 5, inicio1 +30);
+            function frame(fin1) {
+                if (pos1 === fin1) {
+                    clearInterval(id1);
+                } else {
+                    pos1++;
+                    elem1.style.left = pos1 + 'px';
+                }
+            }
+
+        }
+
+
+        function Caballo(nombre, edad) {
+ 
+            this.nombre = nombre;
+            this.edad = edad;
+            this.totalRecorrido = [];
+
+            this.avanzar = avanzar;
+            this.myMove = myMove;
+            this.myMove1 = myMove1;
+            this.obtenetTotalRecorrido = obtenetTotalRecorrido;
+        }
+
+
+        function avanzar() {
+            var distancia = (Math.floor(Math.random() * 5) + 1) * 7;
+            this.totalRecorrido.push(distancia);
+            console.log(this.nombre + " avanzó " + distancia);
+            return distancia;
+
+        }
+
+        function obtenetTotalRecorrido() {
+            var total = this.totalRecorrido.reduce(sumar);
+            return total;
+        }
+
+        function sumar(sumaTotal, recorrido) {
+            return sumaTotal + recorrido;
+        }
+
+    </script>
+
+</body>
+
+</html>
